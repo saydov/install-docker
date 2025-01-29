@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  ubuntu:
+    build: .
+    container_name: ubuntu-container
+    tty: true # terminal
+    stdin_open: true

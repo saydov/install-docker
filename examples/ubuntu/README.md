@@ -1,8 +1,6 @@
-# Установка Redis в Docker
+# Установка Ubuntu в Docker
 
-**Redis** — это высокопроизводительная система управления базами данных, которая использует память для хранения данных
-
-Есть два способа установки **Redis** в **Docker**:
+Есть два способа установки **Ubuntu** в **Docker**:
 - [Dockerfile](#-dockerfile)
 - [Docker Compose](#-docker-compose)
 
@@ -13,21 +11,21 @@
 **1. Скачайте `Dockerfile` из репозитория:**
    #### Через `wget`
    ```sh
-   wget https://raw.githubusercontent.com/saydov/install-docker/master/examples/redis/Dockerfile
+   wget https://raw.githubusercontent.com/saydov/install-docker/master/examples/ubuntu/Dockerfile
    ```
    #### Через `curl`
    ```sh
-   curl -O https://raw.githubusercontent.com/saydov/install-docker/master/examples/redis/Dockerfile
+   curl -O https://raw.githubusercontent.com/saydov/install-docker/master/examples/ubuntu/Dockerfile
    ```
 
 **2. Соберите образ:**
    ```sh
-   docker build -t redis-img .
+   docker build -t ubuntu-img .
    ```
 
 **3. Запустите контейнер:**
    ```sh
-   docker run -d -p 6379:6379 --name redis-server redis-img
+   docker run -d --name ubuntu-container ubuntu-img
    ```
 
 **4. Проверьте, что контейнер работает:**
@@ -35,24 +33,24 @@
    docker ps
    ```
 
-**5. Подключитесь к Redis через CLI:**
+**5. Подключитесь к контейнеру через оболочку /bin/bash:**
    ```sh
-   docker exec -it redis-server redis-cli
+   docker exec -it ubuntu-container /bin/bash
    ```
 
 **6. Остановка контейнера:**
    ```sh
-   docker stop redis-server
+   docker stop ubuntu-container
    ```
 
 **7. Удаление контейнера:**
    ```sh
-   docker rm redis-server
+   docker rm ubuntu-container
    ```
 
 **8. Удаление образа:**
    ```sh
-   docker rmi redis-img
+   docker rmi ubuntu-img
    ```
 
 ---
@@ -62,11 +60,11 @@
 **1. Скачайте `docker-compose.yml` из репозитория:**
 #### Через `wget`
    ```sh
-   wget https://raw.githubusercontent.com/saydov/install-docker/master/examples/redis/docker-compose.yml
+   wget https://raw.githubusercontent.com/saydov/install-docker/master/examples/ubuntu/docker-compose.yml
    ```
 #### Через `curl`
    ```sh
-   curl -O https://raw.githubusercontent.com/saydov/install-docker/master/examples/redis/docker-compose.yml
+   curl -O https://raw.githubusercontent.com/saydov/install-docker/master/examples/ubuntu/docker-compose.yml
    ```
 
 **2. Соберите контейнеры:**
@@ -90,9 +88,9 @@
   docker ps
   ```
 
-**5. Подключитесь к Redis через CLI:**
+**5. Подключитесь к контейнеру через оболочку /bin/bash:**
    ```sh
-   docker-compose exec redis-server redis-cli
+   docker-compose exec ubuntu-container /bin/bash
    ```
 
 **6. Остановка контейнера:**
@@ -108,6 +106,6 @@
 
 ## Полезные ссылки
 
-- [Документация Redis](https://redis.io/documentation)
+- [Документация Ubuntu](https://ubuntu.com)
 
 ---

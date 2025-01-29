@@ -37,19 +37,19 @@
 #### Через `wget`
 
 ```sh
-wget https://raw.githubusercontent.com/saydov/install-docker/master/install-docker.sh
+wget https://raw.githubusercontent.com/saydov/install-docker/master/install-docker
 ```
 
 #### Через `curl`
 
 ```sh
-curl -O https://raw.githubusercontent.com/saydov/install-docker/master/install-docker.sh
+curl -O https://raw.githubusercontent.com/saydov/install-docker/master/install-docker
 ```
 
 **2. Добавьте права на выполнение:**
 
 ```sh
-chmod +x install-docker.sh
+chmod +x install-docker
 ```
 
 **3. Запустите скрипт установки:**

@@ -16,15 +16,32 @@ print_image() {
     done
 }
 
+OS_ID=$(grep '^ID=' /etc/os-release | cut -d'=' -f2 | tr -d '"')
+OS_CODENAME=$(lsb_release -cs)
+
+if [[ "$OS_ID" != "debian" && "$OS_ID" != "ubuntu" ]]; then
+    echo -e "${RED}Этот скрипт поддерживает только Debian и Ubuntu${NC}"
+    exit 1
+fi
+
 # docker
 if ! command -v docker &> /dev/null; then
     echo -e "${YELLOW}Docker не найден. Устанавливаем Docker...${NC}"
     
-    apt update
-    apt install -y apt-transport-https ca-certificates curl software-properties-common
-    curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-    apt install -y docker-ce
+    sudo apt update
+    sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/${OS_ID}/gpg | sudo tee /etc/apt/keyrings/docker.gpg > /dev/null
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/${OS_ID} \
+      ${OS_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    sudo apt update
+    sudo apt install -y docker-ce docker-ce-cli containerd.io
+
     echo -e "${GREEN}Docker установлен.${NC}"
 else
     echo -e "${GREEN}Docker уже установлен.${NC}"
@@ -34,8 +51,8 @@ fi
 if ! command -v docker-compose &> /dev/null; then
     echo -e "${YELLOW}Docker Compose не найден. Устанавливаем Docker Compose...${NC}"
     
-    curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
+    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
     echo -e "${GREEN}Docker Compose установлен.${NC}"
 else
     echo -e "${GREEN}Docker Compose уже установлен.${NC}"

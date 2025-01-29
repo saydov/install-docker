@@ -1,9 +1,18 @@
-name: Tests
+name: Tests for different OS 
 on: push
 
 jobs:
-  build:
+  ubuntu:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run chmod to make install-docker executable
+        run: chmod +x ./install-docker
+      - name: Run a script
+        run: ./install-docker
+  debian:
+    runs-on: debian-latest
     steps:
       - uses: actions/checkout@v4
 

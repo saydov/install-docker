@@ -3,6 +3,8 @@
 <div align="center">
   <img src="https://img.shields.io/badge/Docker-19.03.13-blue?style=flat" />
   <img src="https://img.shields.io/badge/Docker%20Compose-1.27.4-blue?style=flat" />
+  <img src="https://img.shields.io/badge/release-v1.0.0-blue?style=flat" />
+  <img src="https://img.shields.io/badge/dev_branch-development-blue?style=flat" />
   <img src="https://img.shields.io/badge/license-MIT-blue?style=flat" />
 </div>
 
